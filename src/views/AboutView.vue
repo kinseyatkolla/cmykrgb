@@ -1,5 +1,5 @@
 <script setup>
-import { site, founder, aboutLead, studioAbout } from "@/data/site";
+import { site, founder, studioIdentity, aboutLead, studioAbout } from "@/data/site";
 import { capabilities } from "@/data/projects";
 import AwardsList from "@/components/AwardsList.vue";
 </script>
@@ -10,7 +10,8 @@ import AwardsList from "@/components/AwardsList.vue";
       <div class="container reveal">
         <p class="section-label">Studio</p>
         <h1 class="heading-xl">About {{ site.name }}</h1>
-        <p class="lead">{{ aboutLead }}</p>
+        <p class="about-identity">{{ studioIdentity }}</p>
+        <p class="lead about-lead">{{ aboutLead }}</p>
       </div>
     </section>
 
@@ -87,6 +88,19 @@ import AwardsList from "@/components/AwardsList.vue";
 <style scoped>
 .about-hero {
   padding-top: clamp(5rem, 12vw, 7rem);
+}
+
+.about-identity {
+  margin-top: 1.5rem;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  max-width: 28rem;
+}
+
+.about-lead {
+  margin-top: 1.5rem;
 }
 
 .about-split {

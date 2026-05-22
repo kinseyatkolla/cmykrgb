@@ -27,10 +27,8 @@ const serviceAccents = {
         <p class="section-label">DESIGN • DEVELOPMENT • PUBLISHING</p>
         <h1 class="hero-headline">Digital + Print</h1>
         <p class="lead hero-lead">
-          {{ site.name }} creates thoughtful visual identities, websites, native
-          apps, and printed work. From branding and logo systems to iOS apps,
-          desktop software, and handmade artist books, every project is designed
-          with clarity, craft, and longevity in mind.
+          Thoughtful identities, websites, apps, and printed work — from ink to
+          screen.
         </p>
         <div class="hero-actions">
           <RouterLink to="/contact" class="btn">Start a project</RouterLink>
@@ -98,8 +96,11 @@ const serviceAccents = {
         <p class="section-label reveal">Selected work</p>
         <h2 class="heading-lg reveal">Case studies</h2>
         <p class="lead reveal">
-          Enterprise platforms, civic campaigns, and products — designed and
-          developed end to end.
+          {{ site.name }} creates thoughtful visual identities, websites, native
+          apps, and printed work. From branding and logo systems to iOS apps,
+          desktop software, and handmade artist books, every project is designed
+          with clarity, craft, and longevity in mind. Enterprise platforms,
+          civic campaigns, and products — designed and developed end to end.
         </p>
         <div class="project-grid reveal">
           <ProjectCard

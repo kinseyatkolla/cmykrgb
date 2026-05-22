@@ -33,6 +33,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <div class="header-paper" aria-hidden="true" />
   <div class="site-header" :class="{ 'site-header--open': open }">
     <header class="header" :class="{ 'header--scrolled': scrolled }">
       <div class="cmyk-bar" aria-hidden="true">
@@ -75,6 +76,17 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.header-paper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--bar-h) + var(--header-h));
+  background: var(--paper);
+  z-index: 99;
+  pointer-events: none;
+}
+
 .site-header {
   position: fixed;
   inset: 0 0 auto;
@@ -85,6 +97,7 @@ onUnmounted(() => {
   position: relative;
   background: rgba(250, 250, 250, 0.92);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s var(--ease);
 }

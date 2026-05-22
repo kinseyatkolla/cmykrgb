@@ -6,6 +6,9 @@ export const site = {
   founded: "2026",
 };
 
+export const studioIdentity =
+  "We're a woman-founded, women-led full-service creative agency.";
+
 export const aboutLead =
   "Print works in subtractive color — cyan, magenta, yellow, and black. Screens work in additive light — red, green, blue. The studio takes its name from the space between those systems: where physical and digital design meet.";
 
