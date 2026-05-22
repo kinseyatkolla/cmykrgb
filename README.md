@@ -44,8 +44,6 @@ Missing images show a CMYK/RGB gradient placeholder.
 3. Railway uses `railway.json` / Nixpacks: `npm ci` → `npm run build` → `npm start`.
 4. Optional: enable **PR deploys** and connect your custom domain.
 
-GitHub Actions (`.github/workflows/ci.yml`) runs `npm run build` on push/PR — separate from Railway’s deploy, useful as a CI gate.
-
 ## Pages
 
 | Route       | Content                          |
