@@ -1,5 +1,6 @@
 <script setup>
 import CmykRgbMark from "@/components/CmykRgbMark.vue";
+import { site } from "@/data/site";
 
 const year = new Date().getFullYear();
 </script>
@@ -17,7 +18,7 @@ const year = new Date().getFullYear();
         </p>
       </div>
       <div class="footer-links">
-        <a href="mailto:hello@cmykrgb.com">hello@cmykrgb.com</a>
+        <a :href="`mailto:${site.email}`">{{ site.email }}</a>
         <RouterLink to="/work">Work</RouterLink>
         <RouterLink to="/services">Services</RouterLink>
         <RouterLink to="/contact">Contact</RouterLink>

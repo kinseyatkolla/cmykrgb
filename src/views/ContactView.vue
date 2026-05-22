@@ -21,7 +21,7 @@ import { site } from "@/data/site";
       <div class="container contact-grid reveal">
         <form
           class="contact-form"
-          action="mailto:hello@cmykrgb.com"
+          :action="`mailto:${site.email}`"
           method="post"
           enctype="text/plain"
         >

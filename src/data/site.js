@@ -2,7 +2,7 @@ export const site = {
   name: "CMYK/RGB",
   tagline: "Design & creative development",
   location: "Denver & Manitou Springs, Colorado",
-  email: "hello@cmykrgb.com",
+  email: "hello@cmyk-rgb.info",
   founded: "2026",
 };
 
