@@ -17,6 +17,7 @@
   --r-blue: #007aff;
 
   --header-h: 4.25rem;
+  --bar-h: 4px;
   --max: 72rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

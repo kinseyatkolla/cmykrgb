@@ -106,7 +106,7 @@
 .cmyk-bar,
 .rgb-bar {
   display: flex;
-  height: 4px;
+  height: var(--bar-h);
   width: 100%;
 }
 

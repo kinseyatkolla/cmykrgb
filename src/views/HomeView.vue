@@ -211,6 +211,8 @@ const serviceAccents = {
 
 .services-list {
   list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -218,7 +220,7 @@ const serviceAccents = {
 
 .service-item {
   display: grid;
-  grid-template-columns: 3.5rem 1fr;
+  grid-template-columns: var(--bar-h) 1fr;
   margin-left: var(--stagger);
   border-top: 1px solid var(--line);
   transition: margin-left 0.45s var(--ease);
@@ -280,18 +282,18 @@ const serviceAccents = {
   gap: 0.6rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .service-item {
-    margin-left: 0 !important;
-    grid-template-columns: 2.25rem 1fr;
+    --stagger: 0px;
+    margin-left: 0;
   }
 
   .service-item:hover {
-    margin-left: 0 !important;
+    margin-left: 0;
   }
 
   .service-item__body {
-    padding: 1.5rem 1rem 1.5rem 1.25rem;
+    padding: 1.5rem 1rem 1.5rem 1.75rem;
   }
 }
 
@@ -343,7 +345,7 @@ const serviceAccents = {
 .process-num {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--c-magenta);
+  color: var(--r-blue);
   line-height: 1;
 }
 
@@ -369,6 +371,10 @@ const serviceAccents = {
 
 .text-link:hover {
   color: var(--c-magenta);
+}
+
+.process-block .text-link:hover {
+  color: var(--r-blue);
 }
 
 .section--about {
@@ -403,6 +409,8 @@ const serviceAccents = {
 
 .capabilities ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   gap: 0.5rem;
 }

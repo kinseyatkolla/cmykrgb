@@ -14,7 +14,7 @@ import AwardsList from "@/components/AwardsList.vue";
       </div>
     </section>
 
-    <div class="cmyk-bar" aria-hidden="true"><span /><span /><span /><span /></div>
+    <div class="rgb-bar" aria-hidden="true"><span /><span /><span /></div>
 
     <section class="section">
       <div class="container about-split reveal">
@@ -168,6 +168,8 @@ import AwardsList from "@/components/AwardsList.vue";
 
 .cap-grid {
   list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   gap: 0.75rem;
@@ -178,6 +180,12 @@ import AwardsList from "@/components/AwardsList.vue";
   padding: 0.75rem 1rem;
   border: 1px solid var(--line);
   font-size: 0.88rem;
+}
+
+@media (max-width: 768px) {
+  .cap-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .cta-mini {
