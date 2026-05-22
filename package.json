@@ -7,14 +7,17 @@
     "node": ">=20.19.0"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "USE_VITE=1 PORT=5173 node server.js",
+    "dev:stop": "sh -c 'lsof -ti :5173 -ti :24678 -ti :24700 2>/dev/null | xargs kill -9 2>/dev/null || true'",
     "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0 --port ${PORT:-4173}",
-    "start": "serve -s dist -l $PORT",
+    "preview": "node server.js",
+    "start": "node server.js",
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "serve": "^14.2.4",
+    "dotenv": "^17.4.2",
+    "express": "^5.1.0",
+    "resend": "^6.0.1",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },

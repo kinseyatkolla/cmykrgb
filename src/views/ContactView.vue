@@ -1,5 +1,51 @@
 <script setup>
+import { ref } from "vue";
 import { site } from "@/data/site";
+
+const status = ref("idle");
+const errorMessage = ref("");
+
+async function onSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  if (!(form instanceof HTMLFormElement)) return;
+
+  status.value = "sending";
+  errorMessage.value = "";
+
+  const payload = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    type: form.type.value,
+    message: form.message.value.trim(),
+    website: form.website?.value ?? "",
+  };
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      throw new Error(
+        data.error || "Something went wrong. Please try again or email us directly.",
+      );
+    }
+
+    status.value = "success";
+    form.reset();
+  } catch (err) {
+    status.value = "error";
+    errorMessage.value =
+      err instanceof Error
+        ? err.message
+        : "Something went wrong. Please try again or email us directly.";
+  }
+}
 </script>
 
 <template>
@@ -19,23 +65,40 @@ import { site } from "@/data/site";
 
     <section class="section">
       <div class="container contact-grid reveal">
-        <form
-          class="contact-form"
-          :action="`mailto:${site.email}`"
-          method="post"
-          enctype="text/plain"
-        >
+        <form class="contact-form" @submit="onSubmit">
+          <label class="hp" aria-hidden="true">
+            <span>Website</span>
+            <input
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </label>
+
           <label>
             <span>Name</span>
-            <input type="text" name="name" required autocomplete="name" />
+            <input
+              type="text"
+              name="name"
+              required
+              autocomplete="name"
+              :disabled="status === 'sending'"
+            />
           </label>
           <label>
             <span>Email</span>
-            <input type="email" name="email" required autocomplete="email" />
+            <input
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              :disabled="status === 'sending'"
+            />
           </label>
           <label>
             <span>Project type</span>
-            <select name="type">
+            <select name="type" :disabled="status === 'sending'">
               <option>Brand &amp; identity</option>
               <option>Website or app</option>
               <option>Campaign &amp; print</option>
@@ -45,12 +108,36 @@ import { site } from "@/data/site";
           </label>
           <label>
             <span>Message</span>
-            <textarea name="message" rows="6" required />
+            <textarea
+              name="message"
+              rows="6"
+              required
+              :disabled="status === 'sending'"
+            />
           </label>
-          <button type="submit" class="btn">Send inquiry</button>
-          <p class="form-note">
-            Opens your email client. Prefer a form backend? Wire Formspree or
-            Railway env vars later.
+
+          <button type="submit" class="btn" :disabled="status === 'sending'">
+            {{ status === "sending" ? "Sending…" : "Send inquiry" }}
+          </button>
+
+          <p
+            v-if="status === 'success'"
+            class="form-feedback form-feedback--success"
+            role="status"
+          >
+            Thanks — your message was sent. We'll reply within a few business
+            days.
+          </p>
+          <p
+            v-else-if="status === 'error'"
+            class="form-feedback form-feedback--error"
+            role="alert"
+          >
+            {{ errorMessage }}
+            <a :href="`mailto:${site.email}`">{{ site.email }}</a>
+          </p>
+          <p v-else class="form-note">
+            Your message is delivered directly — no email app required.
           </p>
         </form>
 
@@ -100,6 +187,14 @@ import { site } from "@/data/site";
   gap: 1.25rem;
 }
 
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .contact-form label {
   display: flex;
   flex-direction: column;
@@ -122,6 +217,13 @@ import { site } from "@/data/site";
   border-radius: 0;
 }
 
+.contact-form input:disabled,
+.contact-form select:disabled,
+.contact-form textarea:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .contact-form input:focus,
 .contact-form select:focus,
 .contact-form textarea:focus {
@@ -129,9 +231,34 @@ import { site } from "@/data/site";
   outline-offset: 2px;
 }
 
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .form-note {
   font-size: 0.82rem;
   color: var(--muted);
+}
+
+.form-feedback {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.form-feedback--success {
+  color: var(--ink);
+}
+
+.form-feedback--error {
+  color: var(--r-red);
+}
+
+.form-feedback--error a {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-weight: 600;
 }
 
 .contact-aside {
