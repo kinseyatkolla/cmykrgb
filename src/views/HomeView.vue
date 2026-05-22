@@ -5,6 +5,7 @@ import { services, processSteps } from "@/data/services";
 import { featuredProjects, capabilities } from "@/data/projects";
 import AwardsList from "@/components/AwardsList.vue";
 import ProjectCard from "@/components/ProjectCard.vue";
+import ServicesColorField from "@/components/ServicesColorField.vue";
 import ctaPaperBg from "@/assets/paper/black2.jpeg";
 
 const homeTeaserProjects = computed(() =>
@@ -12,10 +13,10 @@ const homeTeaserProjects = computed(() =>
 );
 
 const serviceAccents = {
-  brand: "#00A9E8",
-  digital: "#0000FF",
-  campaign: "#D82D89",
-  creative: "#00FF00",
+  brand: "var(--c-cyan)",
+  digital: "var(--r-blue)",
+  campaign: "var(--c-magenta)",
+  creative: "var(--r-green)",
 };
 </script>
 
@@ -44,32 +45,49 @@ const serviceAccents = {
     <div class="rgb-bar" aria-hidden="true"><span /><span /><span /></div>
 
     <section class="section services-showcase" id="services-preview">
-      <div class="container">
-        <div class="services-head reveal">
+      <Teleport to="body">
+        <ServicesColorField />
+      </Teleport>
+
+      <div class="services-intro-band">
+        <div class="container services-intro reveal">
           <p class="section-label">What we do</p>
           <h2 class="heading-lg">Services</h2>
+          <p class="lead services-lead">
+            Identity, software, print, and custom creative work — designed and
+            built together under one studio practice.
+          </p>
         </div>
+      </div>
 
-        <ol class="services-list reveal">
-          <li
-            v-for="(s, i) in services"
-            :key="s.id"
-            class="service-item"
-            :style="{
-              '--accent': serviceAccents[s.id],
-              '--stagger': `${i * 2}rem`,
-            }"
-          >
-            <div class="service-item__rail" aria-hidden="true" />
-            <div class="service-item__body">
-              <h3 class="service-item__title">{{ s.title }}</h3>
-              <p class="service-item__summary">{{ s.summary }}</p>
-              <RouterLink :to="`/services#${s.id}`" class="service-item__link">
-                Explore <span aria-hidden="true">↗</span>
-              </RouterLink>
-            </div>
-          </li>
-        </ol>
+      <div class="services-mosaic reveal" role="list">
+        <article
+          v-for="(s, i) in services"
+          :key="s.id"
+          class="service-row"
+          :class="{ 'service-row--flip': i % 2 === 1 }"
+          role="listitem"
+          :style="{ '--accent': serviceAccents[s.id] }"
+        >
+          <div class="mosaic-cell mosaic-cell--art" aria-hidden="true">
+            <div class="mosaic-cell__glass" />
+          </div>
+          <div class="mosaic-cell mosaic-cell--copy">
+            <h3 class="mosaic-cell__title">{{ s.title }}</h3>
+            <p class="mosaic-cell__summary">{{ s.summary }}</p>
+            <RouterLink :to="`/services#${s.id}`" class="mosaic-cell__link">
+              Explore <span aria-hidden="true">↗</span>
+            </RouterLink>
+          </div>
+        </article>
+      </div>
+
+      <div class="services-foot-band">
+        <div class="container services-mosaic-foot reveal">
+          <RouterLink to="/services" class="btn btn--ghost btn--pill">
+            All services <span aria-hidden="true">→</span>
+          </RouterLink>
+        </div>
       </div>
     </section>
 
@@ -136,10 +154,12 @@ const serviceAccents = {
       </div>
     </section>
 
-    <section class="section">
-      <div class="container awards-block reveal">
-        <p class="section-label">Recognition</p>
-        <AwardsList />
+    <section class="section section--awards">
+      <div class="awards-band">
+        <div class="container awards-block reveal">
+          <p class="section-label">Recognition</p>
+          <AwardsList />
+        </div>
       </div>
     </section>
 
@@ -164,6 +184,7 @@ const serviceAccents = {
   min-height: 85vh;
   display: flex;
   align-items: flex-end;
+  background: var(--paper);
 }
 
 .hero-grid {
@@ -202,99 +223,139 @@ const serviceAccents = {
 }
 
 .services-showcase {
+  position: relative;
+  z-index: 1;
+  padding-block: 0;
+}
+
+.services-intro-band {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: var(--paper);
+  padding-top: clamp(4rem, 10vw, 7rem);
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.services-foot-band {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: var(--paper);
+  padding-top: clamp(2rem, 5vw, 2.5rem);
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+
+.services-mosaic {
+  position: relative;
+  z-index: 1;
+}
+
+.services-lead {
+  margin-top: 1rem;
+}
+
+.services-mosaic {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--ink);
+}
+
+.service-row:last-child {
+  border-bottom: none;
+}
+
+.service-row--flip .mosaic-cell--art {
+  order: 2;
+  border-right: none;
+}
+
+.service-row--flip .mosaic-cell--copy {
+  order: 1;
+  border-right: 1px solid var(--ink);
+}
+
+.mosaic-cell {
+  padding: clamp(1.25rem, 4vw, 4.5rem) clamp(1rem, 3vw, 3rem);
+}
+
+.mosaic-cell--art {
+  position: relative;
+  min-height: clamp(8rem, 28vw, 14rem);
+  background: transparent;
   overflow: hidden;
+  border-right: 1px solid var(--ink);
 }
 
-.services-head {
-  margin-bottom: 2.5rem;
+.mosaic-cell__glass {
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 250, 250, 0.42);
+  backdrop-filter: blur(28px) saturate(1.2);
+  -webkit-backdrop-filter: blur(28px) saturate(1.2);
 }
 
-.services-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+@supports not (backdrop-filter: blur(1px)) {
+  .mosaic-cell__glass {
+    background: rgba(250, 250, 250, 0.88);
+  }
+}
+
+.mosaic-cell--copy {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 0;
-}
-
-.service-item {
-  display: grid;
-  grid-template-columns: var(--bar-h) 1fr;
-  margin-left: var(--stagger);
-  border-top: 1px solid var(--line);
-  transition: margin-left 0.45s var(--ease);
-}
-
-.service-item:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.service-item:hover {
-  margin-left: calc(var(--stagger) + 0.5rem);
-}
-
-.service-item__rail {
-  background: var(--accent);
-}
-
-.service-item__body {
-  padding: 2rem 1.5rem 2rem 2rem;
   background: #fff;
 }
 
-.service-item:nth-child(even) .service-item__body {
-  background: var(--paper);
-}
-
-.service-item__title {
-  font-size: clamp(1.35rem, 3vw, 2rem);
-  font-weight: 300;
+.mosaic-cell__title {
+  font-size: clamp(1rem, 3.2vw, 2.25rem);
+  font-weight: 400;
   letter-spacing: -0.02em;
-  max-width: 16ch;
+  line-height: 1.1;
 }
 
-.service-item__summary {
-  margin-top: 0.75rem;
+.mosaic-cell__summary {
+  margin-top: 0.85rem;
   color: var(--muted);
-  max-width: 38rem;
-  font-size: 1rem;
-  line-height: 1.55;
+  font-size: clamp(0.8rem, 2vw, 1.05rem);
+  line-height: 1.5;
 }
 
-.service-item__link {
+.mosaic-cell__link {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  margin-top: 1.25rem;
+  margin-top: clamp(1rem, 3vw, 2rem);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ink);
-  border-bottom: 1px solid var(--accent);
+  border-bottom: 1px solid transparent;
   padding-bottom: 0.15rem;
-  transition: color 0.2s, gap 0.25s var(--ease);
+  align-self: flex-start;
+  transition:
+    color 0.2s,
+    gap 0.25s var(--ease),
+    border-color 0.2s;
 }
 
-.service-item__link:hover {
+.mosaic-cell__link:hover {
   color: var(--accent);
+  border-bottom-color: var(--accent);
   gap: 0.6rem;
 }
 
-@media (max-width: 768px) {
-  .service-item {
-    --stagger: 0px;
-    margin-left: 0;
-  }
-
-  .service-item:hover {
-    margin-left: 0;
-  }
-
-  .service-item__body {
-    padding: 1.5rem 1rem 1.5rem 1.75rem;
-  }
+.services-mosaic-foot {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .section--soft {
@@ -420,7 +481,22 @@ const serviceAccents = {
   color: var(--c-cyan);
 }
 
+.section--awards {
+  padding-block: 0;
+}
+
+.awards-band {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: #fff;
+  padding-block: clamp(4rem, 10vw, 7rem);
+}
+
 .cta-band {
+  position: relative;
+  z-index: 1;
+  background-color: var(--ink);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

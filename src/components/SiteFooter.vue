@@ -30,8 +30,10 @@ const year = new Date().getFullYear();
 
 <style scoped>
 .footer {
+  position: relative;
+  z-index: 2;
   margin-top: auto;
-  background: #fff;
+  background: var(--paper);
   color: var(--ink);
 }
 

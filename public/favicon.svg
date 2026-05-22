@@ -8,7 +8,7 @@
   <rect x="1" y="1" width="1" height="1" fill="#0A0A0A" />
   <rect x="2" y="1" width="1" height="1" fill="#ffffff" />
   <!-- row 3: red, green, blue -->
-  <rect y="2" width="1" height="1" fill="#FF2D55" />
-  <rect x="1" y="2" width="1" height="1" fill="#34C759" />
-  <rect x="2" y="2" width="1" height="1" fill="#007AFF" />
+  <rect y="2" width="1" height="1" fill="#ff0000" />
+  <rect x="1" y="2" width="1" height="1" fill="#00ff00" />
+  <rect x="2" y="2" width="1" height="1" fill="#0000ff" />
 </svg>

@@ -6,6 +6,8 @@
 }
 
 .page {
+  position: relative;
+  z-index: 1;
   padding-top: var(--header-h);
 }
 
@@ -30,7 +32,7 @@
 .hero-location,
 .nav-link,
 .nav-cta,
-.service-item__link,
+.mosaic-cell__link,
 .footer-links a,
 .founder-label,
 .contact-label,
@@ -101,6 +103,13 @@
 .btn--ghost:hover {
   background: var(--ink);
   color: var(--paper);
+}
+
+.btn--pill {
+  border-radius: 999px;
+  padding-inline: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
 }
 
 .cmyk-bar,
