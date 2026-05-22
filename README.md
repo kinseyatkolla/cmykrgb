@@ -41,7 +41,7 @@ Missing images show a CMYK/RGB gradient placeholder.
 
 1. Push this repo to GitHub.
 2. In Railway: **New Project** → **Deploy from GitHub repo** → select this repository.
-3. Railway uses `railway.json` / Nixpacks: `npm ci` → `npm run build` → `npm start`.
+3. Railway auto-detects Node (Nixpacks): install deps → `npm run build` → `npm start` (same pattern as [kinsey-dot-info](../kinsey-dot-info/kinsey-info)).
 4. Optional: enable **PR deploys** and connect your custom domain.
 
 ## Pages
