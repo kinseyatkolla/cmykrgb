@@ -32,7 +32,8 @@ async function onSubmit(event) {
 
     if (!res.ok) {
       throw new Error(
-        data.error || "Something went wrong. Please try again or email us directly.",
+        data.error ||
+          "Something went wrong. Please try again or email us directly.",
       );
     }
 
@@ -55,8 +56,8 @@ async function onSubmit(event) {
         <p class="section-label">Contact</p>
         <h1 class="heading-xl">Start a project</h1>
         <p class="lead">
-          Tell us about your timeline, budget range, and what you're building. We
-          typically reply within two business days.
+          Tell us about your timeline, budget range, and what you're building.
+          We typically reply within two business days.
         </p>
       </div>
     </section>
@@ -135,9 +136,6 @@ async function onSubmit(event) {
           >
             {{ errorMessage }}
             <a :href="`mailto:${site.email}`">{{ site.email }}</a>
-          </p>
-          <p v-else class="form-note">
-            Your message is delivered directly — no email app required.
           </p>
         </form>
 
