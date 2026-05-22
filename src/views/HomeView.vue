@@ -2,13 +2,21 @@
 import { computed } from "vue";
 import { site, founder } from "@/data/site";
 import { services, processSteps } from "@/data/services";
-import { featuredProjects, capabilities, awards } from "@/data/projects";
+import { featuredProjects, capabilities } from "@/data/projects";
+import AwardsList from "@/components/AwardsList.vue";
 import ProjectCard from "@/components/ProjectCard.vue";
 import ctaPaperBg from "@/assets/paper/black2.jpeg";
 
 const homeTeaserProjects = computed(() =>
   featuredProjects.filter((p) => p.id !== "manitou-arts").slice(0, 3),
 );
+
+const serviceAccents = {
+  brand: "#00A9E8",
+  digital: "#0000FF",
+  campaign: "#D82D89",
+  creative: "#00FF00",
+};
 </script>
 
 <template>
@@ -35,19 +43,33 @@ const homeTeaserProjects = computed(() =>
 
     <div class="rgb-bar" aria-hidden="true"><span /><span /><span /></div>
 
-    <section class="section" id="services-preview">
+    <section class="section services-showcase" id="services-preview">
       <div class="container">
-        <p class="section-label reveal">What we do</p>
-        <h2 class="heading-lg reveal">Services</h2>
-        <div class="service-grid reveal">
-          <article v-for="s in services" :key="s.id" class="service-card">
-            <h3>{{ s.title }}</h3>
-            <p>{{ s.summary }}</p>
-            <RouterLink :to="`/services#${s.id}`" class="service-more"
-              >Learn more →</RouterLink
-            >
-          </article>
+        <div class="services-head reveal">
+          <p class="section-label">What we do</p>
+          <h2 class="heading-lg">Services</h2>
         </div>
+
+        <ol class="services-list reveal">
+          <li
+            v-for="(s, i) in services"
+            :key="s.id"
+            class="service-item"
+            :style="{
+              '--accent': serviceAccents[s.id],
+              '--stagger': `${i * 2}rem`,
+            }"
+          >
+            <div class="service-item__rail" aria-hidden="true" />
+            <div class="service-item__body">
+              <h3 class="service-item__title">{{ s.title }}</h3>
+              <p class="service-item__summary">{{ s.summary }}</p>
+              <RouterLink :to="`/services#${s.id}`" class="service-item__link">
+                Explore <span aria-hidden="true">↗</span>
+              </RouterLink>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -117,19 +139,7 @@ const homeTeaserProjects = computed(() =>
     <section class="section">
       <div class="container awards-block reveal">
         <p class="section-label">Recognition</p>
-        <ul class="awards-list">
-          <li v-for="a in awards" :key="a.year">
-            <span class="award-year">{{ a.year }}</span>
-            <a
-              v-if="a.url"
-              :href="a.url"
-              target="_blank"
-              rel="noopener noreferrer"
-              >{{ a.title }}</a
-            >
-            <span v-else>{{ a.title }}</span>
-          </li>
-        </ul>
+        <AwardsList />
       </div>
     </section>
 
@@ -163,8 +173,7 @@ const homeTeaserProjects = computed(() =>
 }
 
 .hero-headline {
-  /* Alternates loaded: "Amarante", serif · "Bellota", sans-serif */
-  font-family: "Aguafina Script", cursive;
+  font-family: var(--font-hero);
   font-size: clamp(4.5rem, 18vw, 12rem);
   font-weight: 400;
   line-height: 0.95;
@@ -192,44 +201,98 @@ const homeTeaserProjects = computed(() =>
   margin-top: 1rem;
 }
 
-.service-grid {
-  display: grid;
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  margin-top: 2rem;
+.services-showcase {
+  overflow: hidden;
 }
 
-@media (min-width: 768px) {
-  .service-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.services-head {
+  margin-bottom: 2.5rem;
 }
 
-.service-card {
-  background: var(--paper);
-  padding: 2rem;
+.services-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0;
 }
 
-.service-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
+.service-item {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  margin-left: var(--stagger);
+  border-top: 1px solid var(--line);
+  transition: margin-left 0.45s var(--ease);
 }
 
-.service-card p {
+.service-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.service-item:hover {
+  margin-left: calc(var(--stagger) + 0.5rem);
+}
+
+.service-item__rail {
+  background: var(--accent);
+}
+
+.service-item__body {
+  padding: 2rem 1.5rem 2rem 2rem;
+  background: #fff;
+}
+
+.service-item:nth-child(even) .service-item__body {
+  background: var(--paper);
+}
+
+.service-item__title {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+
+.service-item__summary {
+  margin-top: 0.75rem;
   color: var(--muted);
-  flex: 1;
+  max-width: 38rem;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
-.service-more {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
+.service-item__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.15rem;
+  transition: color 0.2s, gap 0.25s var(--ease);
+}
+
+.service-item__link:hover {
+  color: var(--accent);
+  gap: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .service-item {
+    margin-left: 0 !important;
+    grid-template-columns: 2.25rem 1fr;
+  }
+
+  .service-item:hover {
+    margin-left: 0 !important;
+  }
+
+  .service-item__body {
+    padding: 1.5rem 1rem 1.5rem 1.25rem;
+  }
 }
 
 .section--soft {
@@ -286,7 +349,7 @@ const homeTeaserProjects = computed(() =>
 
 .process-list h3 {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 300;
   margin-bottom: 0.35rem;
 }
 
@@ -349,28 +412,6 @@ const homeTeaserProjects = computed(() =>
   color: var(--c-cyan);
 }
 
-.awards-list {
-  list-style: none;
-  margin-top: 1.5rem;
-}
-
-.awards-list li {
-  display: grid;
-  grid-template-columns: 4rem 1fr;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.award-year {
-  font-weight: 600;
-  color: var(--c-magenta);
-}
-
-.awards-list a {
-  text-decoration: none;
-}
-
 .cta-band {
   background-size: cover;
   background-position: center;
@@ -392,14 +433,15 @@ const homeTeaserProjects = computed(() =>
 
 .cta-inner .btn {
   margin-top: 0.5rem;
-  background: var(--paper);
+  background: transparent;
   border-color: var(--paper);
-  color: var(--ink);
+  color: var(--paper);
 }
 
 .cta-inner .btn:hover {
-  background: transparent;
-  color: var(--paper);
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
 }
 
 .inline-code {

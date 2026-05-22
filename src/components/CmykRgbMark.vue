@@ -31,8 +31,7 @@ defineProps({
   height: 2.85rem;
   border: 1px solid var(--ink);
   background: #fff;
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: clamp(0.48rem, 2.2vw, 0.62rem);
   line-height: 1;
   letter-spacing: 0;

@@ -181,7 +181,6 @@ const altBase = computed(
 
 .project-title {
   font-size: 1.35rem;
-  font-weight: 700;
   letter-spacing: -0.02em;
 }
 

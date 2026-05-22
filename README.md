@@ -8,7 +8,7 @@ Design & creative development studio site — Vue 3 + Vite, served on Node via [
 - **Vite** for dev & build
 - **serve** for production static hosting on Railway (Nixpacks)
 
-Typography: **[Outfit](https://fonts.google.com/specimen/Outfit)** for headings, **[Google Sans](https://fonts.google.com/specimen/Google+Sans)** for body copy (Google Fonts in `index.html`).
+Typography: **[Google Sans Flex](https://fonts.google.com/specimen/Google+Sans+Flex)** (variable, 100–900) for almost everything; small caps use weight 300. Hero “Digital + Print” uses **[Aguafina Script](https://fonts.google.com/specimen/Aguafina+Script)** only.
 
 ## Local development
 

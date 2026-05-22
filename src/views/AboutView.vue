@@ -1,6 +1,7 @@
 <script setup>
-import { site, founder } from "@/data/site";
-import { awards, capabilities } from "@/data/projects";
+import { site, founder, aboutLead, studioAbout } from "@/data/site";
+import { capabilities } from "@/data/projects";
+import AwardsList from "@/components/AwardsList.vue";
 </script>
 
 <template>
@@ -9,10 +10,7 @@ import { awards, capabilities } from "@/data/projects";
       <div class="container reveal">
         <p class="section-label">Studio</p>
         <h1 class="heading-xl">About {{ site.name }}</h1>
-        <p class="lead">
-          A design and development practice rooted in print discipline and
-          screen craft — founded {{ site.founded }} in Colorado.
-        </p>
+        <p class="lead">{{ aboutLead }}</p>
       </div>
     </section>
 
@@ -22,15 +20,8 @@ import { awards, capabilities } from "@/data/projects";
       <div class="container about-split reveal">
         <div>
           <h2 class="heading-lg">Why CMYK/RGB?</h2>
-          <p class="body-text">
-            Print thinks in subtractive color — cyan, magenta, yellow, and key.
-            Screens think in additive light — red, green, blue. Great work lives
-            in both worlds. We name the studio after that tension: brand systems
-            that work on paper and in pixels, campaigns that feel tactile online,
-            and code that respects the design intent.
-          </p>
-          <p class="body-text">
-            {{ founder.bio }}
+          <p v-for="(text, i) in studioAbout" :key="i" class="body-text">
+            {{ text }}
           </p>
         </div>
         <aside class="founder-card">
@@ -80,15 +71,7 @@ import { awards, capabilities } from "@/data/projects";
     <section class="section awards-section">
       <div class="container reveal">
         <p class="section-label">Recognition</p>
-        <ul class="awards">
-          <li v-for="a in awards" :key="a.year">
-            <span>{{ a.year }}</span>
-            <a v-if="a.url" :href="a.url" target="_blank" rel="noopener noreferrer">{{
-              a.title
-            }}</a>
-            <span v-else>{{ a.title }}</span>
-          </li>
-        </ul>
+        <AwardsList />
       </div>
     </section>
 
@@ -138,15 +121,14 @@ import { awards, capabilities } from "@/data/projects";
 }
 
 .founder-name {
-  font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 300;
   margin-top: 0.5rem;
 }
 
 .founder-role {
   margin-top: 0.25rem;
-  color: var(--c-magenta);
+  color: var(--r-blue);
   font-size: 0.9rem;
 }
 
@@ -174,9 +156,8 @@ import { awards, capabilities } from "@/data/projects";
 }
 
 .values-grid h3 {
-  font-family: var(--font-display);
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 300;
   margin-bottom: 0.5rem;
 }
 
@@ -197,28 +178,6 @@ import { awards, capabilities } from "@/data/projects";
   padding: 0.75rem 1rem;
   border: 1px solid var(--line);
   font-size: 0.88rem;
-}
-
-.awards {
-  list-style: none;
-  margin-top: 1rem;
-}
-
-.awards li {
-  display: grid;
-  grid-template-columns: 4rem 1fr;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.awards li span:first-child {
-  font-weight: 600;
-  color: var(--c-magenta);
-}
-
-.awards a {
-  text-decoration: none;
 }
 
 .cta-mini {

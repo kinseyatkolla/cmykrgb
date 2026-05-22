@@ -39,7 +39,7 @@ onUnmounted(() => {
     </div>
     <div class="header-inner container">
       <RouterLink to="/" class="logo" @click="closeMenu">
-        <CmykRgbMark />
+        <CmykRgbMark borderless />
       </RouterLink>
 
       <button

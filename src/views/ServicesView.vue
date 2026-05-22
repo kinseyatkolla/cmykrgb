@@ -9,8 +9,9 @@ import { services, processSteps } from "@/data/services";
         <p class="section-label">Capabilities</p>
         <h1 class="heading-xl">Services</h1>
         <p class="lead">
-          Strategy through launch — brand, campaign, product design, and Vue.js
-          development under one roof.
+          From strategy and identity systems to software, publishing, and
+          production — design and development handled together under one studio
+          practice.
         </p>
       </div>
     </section>
@@ -180,8 +181,7 @@ import { services, processSteps } from "@/data/services";
 }
 
 .engagement-card h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 300;
   margin-bottom: 0.5rem;
 }
 

@@ -3,48 +3,48 @@ export const services = [
     id: "brand",
     title: "Brand & Identity",
     summary:
-      "Logos, visual systems, voice, and guidelines that hold up in print and on screen.",
+      "Visual systems designed to feel cohesive across print, packaging, environments, and digital platforms.",
     deliverables: [
-      "Naming & positioning workshops",
-      "Logo & mark systems",
-      "Typography & color palettes",
-      "Brand guidelines & templates",
+      "Naming & positioning",
+      "Logo & identity systems",
+      "Typography & color direction",
+      "Brand guidelines & reusable templates",
     ],
   },
   {
     id: "digital",
     title: "Digital Products",
     summary:
-      "Websites and apps designed and built together — no handoff cliff between design and code.",
+      "Websites, native applications, and digital tools designed and built together from concept to launch.",
     deliverables: [
       "UX research & information architecture",
-      "UI design & prototyping",
-      "Vue.js frontends & design systems",
-      "Accessible, performant launches",
+      "Interface design & interactive prototyping",
+      "Frontend & native application development",
+      "Accessible, maintainable production systems",
     ],
   },
   {
     id: "campaign",
-    title: "Campaigns & Collateral",
+    title: "Campaigns & Publications",
     summary:
-      "Election materials, event branding, packaging, and print that people actually keep.",
+      "Printed matter, editorial systems, packaging, and launch materials designed with attention to clarity, usability, and physical craft.",
     deliverables: [
-      "Campaign identity & messaging",
-      "Print & environmental graphics",
-      "Social & email templates",
-      "Launch kits & vendor specs",
+      "Campaign identity & messaging systems",
+      "Editorial & publication design",
+      "Packaging, signage, & environmental graphics",
+      "Print production & vendor coordination",
     ],
   },
   {
     id: "creative",
     title: "Creative Development",
     summary:
-      "Illustration, art direction, and interactive experiences when the brief needs more than a template.",
+      "Custom visual and interactive work when projects require something beyond a standard system.",
     deliverables: [
-      "Custom illustration & iconography",
-      "Data visualization & editorial design",
-      "Motion & interactive concepts",
-      "Art direction for photo & video",
+      "Illustration & iconography",
+      "Motion & interactive experiences",
+      "Data visualization & experimental concepts",
+      "Art direction for photography & video",
     ],
   },
 ];
@@ -53,26 +53,26 @@ export const processSteps = [
   {
     step: "01",
     title: "Discover",
-    body: "We learn your audience, constraints, and what success looks like — in a short workshop or async brief.",
+    body: "We learn about your goals, audience, constraints, and materials — whether through conversation, research, or a shared creative brief.",
   },
   {
     step: "02",
     title: "Define",
-    body: "Strategy, sitemap, or moodboards become a shared north star before pixels multiply.",
+    body: "We shape the direction through strategy, references, sketches, wireframes, editorial concepts, or visual systems before production begins.",
   },
   {
     step: "03",
     title: "Design",
-    body: "High-fidelity work in Figma and the Adobe suite, with prototypes you can click through and critique.",
+    body: "Identity systems, interfaces, printed matter, and prototypes are developed with attention to typography, usability, and material detail.",
   },
   {
     step: "04",
     title: "Develop",
-    body: "Production-ready Vue.js, content models, and QA — the same team that designed it ships it.",
+    body: "Websites, native applications, publishing files, and digital systems are built, tested, and refined in-house from start to finish.",
   },
   {
     step: "05",
     title: "Deliver",
-    body: "Launch support, documentation, and training so your team can own what we built together.",
+    body: "Launch support, documentation, print coordination, and long-term maintenance ensure the work remains useful long after release.",
   },
 ];

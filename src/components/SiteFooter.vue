@@ -34,10 +34,6 @@ const year = new Date().getFullYear();
   color: var(--ink);
 }
 
-.footer-rgb-bar {
-  border-top: 1px solid rgba(250, 250, 250, 0.5);
-}
-
 .footer-inner {
   display: grid;
   gap: 2rem;
@@ -70,7 +66,7 @@ const year = new Date().getFullYear();
 }
 
 .footer-links a:hover {
-  color: var(--c-magenta);
+  color: var(--r-blue);
 }
 
 .footer-copy {
